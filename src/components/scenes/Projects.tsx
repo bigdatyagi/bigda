@@ -8,6 +8,7 @@ const projects = [
     world: "Premium Automotive Ecosystem",
     hue: "20 80% 60%",
     tech: ["React", "Node.js", "Tailwind"],
+    link: "https://tyremall.net",
   },
   {
     n: "02",
@@ -15,6 +16,7 @@ const projects = [
     world: "Modern Ecommerce Dimension",
     hue: "280 70% 65%",
     tech: ["React", "Vite", "Stripe"],
+    link: "https://fizzyproducts.com",
   },
   {
     n: "03",
@@ -22,6 +24,7 @@ const projects = [
     world: "Professional Hiring Universe",
     hue: "200 80% 60%",
     tech: ["React", "Express", "AI"],
+    link: "https://taskoma.com",
   },
   {
     n: "04",
@@ -29,6 +32,7 @@ const projects = [
     world: "Creative Showcase Realm",
     hue: "150 60% 55%",
     tech: ["React", "Motion", "Framer"],
+    link: "https://ritik-portfolio12.netlify.app/",
   },
 ];
 
@@ -51,8 +55,11 @@ export function Projects() {
       <div className="space-y-px">
         {projects.map((p, i) => (
           <Reveal key={p.name} delay={i * 100}>
-            <div
-              className="relative group overflow-hidden border-y border-border/40 hover:border-ether/40 transition-all duration-1000 cursor-pointer"
+            <a
+              href={p.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative block group overflow-hidden border-y border-border/40 hover:border-ether/40 transition-all duration-1000 cursor-pointer"
               style={{
                 background: `radial-gradient(ellipse at ${i % 2 ? "80%" : "20%"} 50%, hsla(${p.hue}, 0.18), transparent 60%)`,
               }}
@@ -87,7 +94,7 @@ export function Projects() {
                   </div>
                 </div>
               </div>
-            </div>
+            </a>
           </Reveal>
         ))}
       </div>
