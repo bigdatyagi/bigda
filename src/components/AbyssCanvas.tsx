@@ -9,10 +9,21 @@ export function AbyssCanvas() {
     const canvas = ref.current!;
     const ctx = canvas.getContext("2d")!;
     let raf = 0;
-    let w = 0, h = 0;
+    let w = 0,
+      h = 0;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    type P = { x: number; y: number; z: number; vx: number; vy: number; r: number; hue: number; baseVx: number; baseVy: number };
+    type P = {
+      x: number;
+      y: number;
+      z: number;
+      vx: number;
+      vy: number;
+      r: number;
+      hue: number;
+      baseVx: number;
+      baseVy: number;
+    };
     let particles: P[] = [];
 
     const resize = () => {
@@ -66,8 +77,9 @@ export function AbyssCanvas() {
         const dx = mouse.current.x - p.x;
         const dy = mouse.current.y - p.y;
         const d2 = dx * dx + dy * dy;
-        
-        if (d2 < 60000) { // Larger interaction radius
+
+        if (d2 < 60000) {
+          // Larger interaction radius
           const f = (1 - d2 / 60000) * 0.08;
           // Pull towards mouse
           p.vx += (dx / Math.sqrt(d2 + 1)) * f;
@@ -80,7 +92,7 @@ export function AbyssCanvas() {
         // Return to base velocity gently
         p.vx += (p.baseVx - p.vx) * 0.02;
         p.vy += (p.baseVy - p.vy) * 0.02;
-        
+
         // Slight dampening
         p.vx *= 0.99;
         p.vy *= 0.99;
@@ -88,7 +100,7 @@ export function AbyssCanvas() {
         // Apply velocities with parallax (z factor)
         p.x += p.vx * p.z;
         p.y += p.vy * p.z;
-        
+
         // Wrap around
         if (p.x < -50) p.x = w + 50;
         if (p.x > w + 50) p.x = -50;
@@ -110,8 +122,10 @@ export function AbyssCanvas() {
       ctx.lineWidth = 0.4;
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
-          const a = particles[i], b = particles[j];
-          const dx = a.x - b.x, dy = a.y - b.y;
+          const a = particles[i],
+            b = particles[j];
+          const dx = a.x - b.x,
+            dy = a.y - b.y;
           const d2 = dx * dx + dy * dy;
           if (d2 < 12000) {
             // Mix hues for the line
@@ -145,10 +159,10 @@ export function AbyssCanvas() {
     <canvas
       ref={ref}
       className="fixed inset-0 w-full h-full pointer-events-none transition-transform duration-1000 ease-out"
-      style={{ 
+      style={{
         zIndex: 1,
         // Optional subtle CSS parallax
-        transform: `translateY(${scrollY.current * 0.05}px)`
+        transform: `translateY(${scrollY.current * 0.05}px)`,
       }}
       aria-hidden
     />

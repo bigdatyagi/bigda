@@ -12,7 +12,7 @@ export function Contact() {
   const [formState, setFormState] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  
+
   // 3D Tilt Effect State
   const cardRef = useRef<HTMLDivElement>(null);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
@@ -24,13 +24,13 @@ export function Contact() {
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
+
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    
+
     const rotateX = ((y - centerY) / centerY) * -5; // max 5deg tilt
     const rotateY = ((x - centerX) / centerX) * 5;
-    
+
     setRotation({ x: rotateX, y: rotateY });
   };
 
@@ -42,32 +42,34 @@ export function Contact() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Format the message for WhatsApp
     const text = `Hi Vaibhav,\n\nI am ${formState.name} (${formState.email}).\n\n${formState.message}`;
     const whatsappUrl = `https://wa.me/918979714126?text=${encodeURIComponent(text)}`;
-    
+
     // Simulate slight delay for the button animation, then open WhatsApp
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
       window.open(whatsappUrl, "_blank");
-      
+
       setTimeout(() => setSubmitted(false), 5000);
       setFormState({ name: "", email: "", message: "" });
     }, 800);
   };
 
   return (
-    <section className="scene relative py-48 px-8 md:px-20 flex items-center min-h-screen" id="scene-contact">
+    <section
+      className="scene relative py-48 px-8 md:px-20 flex items-center min-h-screen"
+      id="scene-contact"
+    >
       {/* Background intense glow */}
       <div
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-30 animate-pulse-glow pointer-events-none"
         style={{ background: "radial-gradient(circle, oklch(0.7 0.2 250 / 0.5), transparent 70%)" }}
       />
-      
+
       <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-        
         {/* Left Side: Copy & Socials */}
         <div>
           <Reveal>
@@ -77,10 +79,13 @@ export function Contact() {
             </p>
             <h2 className="font-display text-5xl md:text-7xl lg:text-8xl font-extralight leading-[0.95] mb-8">
               Let's build something <br />
-              <span className="italic gradient-text glow-shadow-intense mix-blend-screen">extraordinary.</span>
+              <span className="italic gradient-text glow-shadow-intense mix-blend-screen">
+                extraordinary.
+              </span>
             </h2>
             <p className="text-muted-foreground text-lg md:text-xl font-light max-w-md mb-16 leading-relaxed">
-              Open for opportunities, collaborations, and exploring the boundaries of creative technology.
+              Open for opportunities, collaborations, and exploring the boundaries of creative
+              technology.
             </p>
           </Reveal>
 
@@ -120,14 +125,14 @@ export function Contact() {
               className="glass-panel p-8 md:p-12 rounded-2xl transition-all duration-300 ease-out relative overflow-hidden"
               style={{
                 transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) scale(${isHovering ? 1.02 : 1})`,
-                boxShadow: isHovering 
-                  ? "0 40px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.2), 0 0 40px oklch(0.7 0.2 250 / 0.3)" 
-                  : undefined
+                boxShadow: isHovering
+                  ? "0 40px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.2), 0 0 40px oklch(0.7 0.2 250 / 0.3)"
+                  : undefined,
               }}
             >
               {/* Form animated border glow effect */}
               <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent,oklch(0.7_0.2_250/0.1),transparent)] animate-border-flow pointer-events-none opacity-50" />
-              
+
               <form onSubmit={handleSubmit} className="relative flex flex-col gap-8 z-10">
                 <div className="relative group">
                   <input
@@ -139,8 +144,8 @@ export function Contact() {
                     className="glass-input w-full bg-transparent border-b border-border/50 py-4 px-2 text-lg focus:border-ether transition-colors outline-none peer placeholder-transparent"
                     placeholder="Your Name"
                   />
-                  <label 
-                    htmlFor="name" 
+                  <label
+                    htmlFor="name"
                     className="absolute left-2 top-4 text-muted-foreground font-mono text-sm tracking-wider transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-ether peer-valid:-top-4 peer-valid:text-xs peer-valid:text-ether/70 cursor-text pointer-events-none"
                   >
                     IDENTIFIER [Name]
@@ -157,8 +162,8 @@ export function Contact() {
                     className="glass-input w-full bg-transparent border-b border-border/50 py-4 px-2 text-lg focus:border-ether transition-colors outline-none peer placeholder-transparent"
                     placeholder="Your Email"
                   />
-                  <label 
-                    htmlFor="email" 
+                  <label
+                    htmlFor="email"
                     className="absolute left-2 top-4 text-muted-foreground font-mono text-sm tracking-wider transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-ether peer-valid:-top-4 peer-valid:text-xs peer-valid:text-ether/70 cursor-text pointer-events-none"
                   >
                     COMM-LINK [Email]
@@ -175,8 +180,8 @@ export function Contact() {
                     className="glass-input w-full bg-transparent border-b border-border/50 py-4 px-2 text-lg focus:border-ether transition-colors outline-none peer placeholder-transparent resize-none"
                     placeholder="Your Message"
                   />
-                  <label 
-                    htmlFor="message" 
+                  <label
+                    htmlFor="message"
                     className="absolute left-2 top-4 text-muted-foreground font-mono text-sm tracking-wider transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-ether peer-valid:-top-4 peer-valid:text-xs peer-valid:text-ether/70 cursor-text pointer-events-none"
                   >
                     TRANSMISSION [Message]
@@ -195,7 +200,9 @@ export function Contact() {
                   ) : (
                     <>
                       <span>Initiate Sequence</span>
-                      <span className="group-hover:translate-x-2 transition-transform duration-300">→</span>
+                      <span className="group-hover:translate-x-2 transition-transform duration-300">
+                        →
+                      </span>
                     </>
                   )}
                 </button>
