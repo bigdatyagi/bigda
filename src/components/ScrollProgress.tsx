@@ -9,7 +9,7 @@ const scenes = [
   { id: "scene-projects", label: "VI" },
   { id: "scene-intelligence", label: "VII" },
   { id: "scene-vision", label: "VIII" },
-  { id: "scene-gateway", label: "IX" },
+  { id: "scene-contact", label: "IX" },
 ];
 
 export function ScrollProgress() {
